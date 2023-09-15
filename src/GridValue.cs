@@ -1,11 +1,10 @@
-namespace ClassicSnakeGameGUI.src
-{
-    public enum GridValue
-    {
-        Empty,
-        Snake,
-        Food,
-        Outside
+namespace ClassicSnakeGameGUI.src;
 
-    }
+public enum GridValue
+{
+    Empty,
+    Snake,
+    Food,
+    Outside
+
 }
