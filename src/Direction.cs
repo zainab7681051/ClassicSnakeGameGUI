@@ -13,6 +13,7 @@ public class Direction
     public int ColOffset { get; }
     private Direction(int rowOffset, int colOffset)
     {
+
         RowOffset = rowOffset;
         ColOffset = colOffset;
     }
