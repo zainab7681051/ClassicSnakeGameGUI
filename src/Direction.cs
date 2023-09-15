@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace ClassicSnakeGameGUI
+namespace ClassicSnakeGameGUI.src
 {
     public class Direction
     {

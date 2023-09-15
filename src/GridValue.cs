@@ -1,4 +1,4 @@
-namespace ClassicSnakeGameGUI
+namespace ClassicSnakeGameGUI.src
 {
     public enum GridValue
     {
