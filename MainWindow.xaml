@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClassicSnakeGameGUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Snake" Height="500" Width="800"
+        Background="{StaticResource BackgroundColor}"
+        Foreground="{StaticResource TextColor}"
+        FontFamily ="{StaticResource MainFont}"
+        WindowStartUpLocation="CenterScreen"
+        Icon="./assets/icon.ico">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="ScoreText"
+            HorizentalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="SCORE 0"
+            FontSize="22"
+            Margin="10"/>
     </Grid>
 </Window>

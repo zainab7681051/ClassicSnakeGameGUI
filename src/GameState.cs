@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Channels;
+using System.Windows.Documents;
 using ClassicSnakeGameGUI.src;
 
 namespace ClassicSnakeGameGUI.srs;
@@ -9,10 +10,15 @@ public class GameState
 {
     public int Rows { get; }
     public int Cols { get; }
-    public GridValue[,] Grid { get; }
+    public GridValue[,] Grid { get; } //array of GridValues, GridValue is an enum
     public Direction Dir { get; private set; }
+    public int Score { get; private set; }
+    public bool GameOver { get; private set; }
+
     public readonly LinkedList<Position> snakePositions = new();
     private readonly Random random = new();
+
+
     public GameState(int rows, int cols)
     {
         Rows = rows;
@@ -79,4 +85,47 @@ public class GameState
         Dir = dir;
     }
 
+    private bool OutsideGrid(Position pos)
+    {
+        return pos.Row < 0
+        || pos.Row >= Rows
+        || pos.Col < 0
+        || pos.Col >= Cols;
+    }
+    private GridValue WillHit(Position newHeadPos)
+    {
+        if (OutsideGrid(newHeadPos))
+        {
+            return GridValue.Outside;
+        }
+
+        //if the head and tail collide dont end the game but return value of empty 
+        if (newHeadPos == TailPosition())
+        {
+            return GridValue.Empty;
+        }
+
+        return Grid[newHeadPos.Row, newHeadPos.Col];
+    }
+    public void Move()
+    {
+        Position newHeadPos = HeadPosition().Translate(Dir);
+        GridValue hit = WillHit(newHeadPos);
+        if (hit == GridValue.Outside || hit == GridValue.Snake)
+        {
+            GameOver = true;
+        }
+        else if (hit == GridValue.Empty)
+        {
+            RemoveTail();
+            AddHead(newHeadPos);
+        }
+        else if (hit == GridValue.Food)
+        {
+            AddHead(newHeadPos);
+            Score++;
+            AddFood();
+        }
+
+    }
 }
